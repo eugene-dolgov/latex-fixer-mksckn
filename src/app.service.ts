@@ -30,7 +30,7 @@ export class AppService {
       unlinkSync('result.json');
     }
     const results = [];
-    CONTENT_LIST.slice(0, 10).forEach((contentItem) => {
+    CONTENT_LIST.forEach((contentItem) => {
       const mcq = JSON.parse(contentItem.content);
       const expressions: string[] = [mcq.question];
       mcq.answer_options.forEach((option) => {
@@ -53,17 +53,17 @@ export class AppService {
       const oldResult = texvcjs.check(oldStr);
       const newStr: string = this.latexFixerService.fix(oldStr);
       const newResult = texvcjs.check(newStr);
-      const newReversedResult = texvcjs.check(
-        (this.latexFixerService as any).reverseWrapping(newStr),
-      );
+      const newReversedStr = (this.latexFixerService as any).reverseWrapping(newStr);
+      const newReversedResult = texvcjs.check(newReversedStr);
 
       const result = {
         old: oldStr,
-        oldResult: oldResult.status === '+' ? oldResult : oldResult.error,
+        oldValid: oldResult.status === '+' ? true : oldResult.error,
         new: newStr,
-        newResult: newResult.status === '+' ? newResult : newResult.error,
-        newReversedResult: newReversedResult.status === '+'
-          ? newReversedResult
+        newValid: newResult.status === '+' ? true : newResult.error,
+        newReversed: newReversedStr,
+        newReversedValid: newReversedResult.status === '+'
+          ? true
           : newReversedResult.error,
       };
       results.push(result);
