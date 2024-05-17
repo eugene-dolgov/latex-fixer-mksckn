@@ -60,9 +60,7 @@ export class LatexFixerService {
     input = this.fixDelimiters(input);
     const segments: LatexSegment[] = this.splitToSegments(input);
     const fixedSegments: LatexSegment[] = this.fixSegments(segments);
-    return fixedSegments
-      .map((segment: LatexSegment) => segment.content)
-      .join('');
+    return fixedSegments.map((segment: LatexSegment) => segment.content).join('');
   }
 
   private fixSegments(segments: LatexSegment[]): LatexSegment[] {
@@ -71,9 +69,7 @@ export class LatexFixerService {
       let content: string;
       if (segment.innerSegments) {
         segment.innerSegments = this.fixSegments(segment.innerSegments);
-        content = segment.innerSegments
-          .map((innerSegment: LatexSegment) => innerSegment.content)
-          .join('');
+        content = segment.innerSegments.map((innerSegment: LatexSegment) => innerSegment.content).join('');
       } else {
         content = segment.innerContent || segment.content;
         this.fixers.forEach((fixer: LatexFixer) => {
@@ -184,10 +180,7 @@ export class LatexFixerService {
         if (this.isInnerSegmentStart(input, i)) {
           depth++;
         }
-        if (
-          this.isInnerSegmentStart(input, i) ||
-          !this.isInnerSegmentEnd(input, i)
-        ) {
+        if (this.isInnerSegmentStart(input, i) || !this.isInnerSegmentEnd(input, i)) {
           continue;
         }
         if (depth === 0) {
@@ -226,11 +219,8 @@ export class LatexFixerService {
         return;
       }
       const segments: LatexSegment[] = this.splitToSegments(line);
-      const reversedSegments: LatexSegment[] =
-        this.reverseSegmentsWrapping(segments);
-      lines[lineIndex] = reversedSegments
-        .map((segment: LatexSegment) => segment.content)
-        .join('');
+      const reversedSegments: LatexSegment[] = this.reverseSegmentsWrapping(segments);
+      lines[lineIndex] = reversedSegments.map((segment: LatexSegment) => segment.content).join('');
       lines[lineIndex] = `$${lines[lineIndex]}$`;
     });
     return lines.join('\n');

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CONTENT_LIST } from './content';
 import { existsSync, unlinkSync, writeFileSync } from 'fs';
-import { LatexFormattingService } from './latex-formatting.service';
+import { LatexFixerService } from './latex-fixer-service';
 
 const texvcjs = require('mathoid-texvcjs');
 
@@ -18,7 +18,7 @@ const EXPRESSIONS_TO_CHECK = [
 
 @Injectable()
 export class AppService {
-  constructor(private latexFormattingService: LatexFormattingService) {}
+  constructor(private latexFixerService: LatexFixerService) {}
 
   getHello(): any {
     // return this.checkExpressions(EXPRESSIONS_TO_CHECK);
@@ -49,25 +49,22 @@ export class AppService {
 
   private checkExpressions(expressions: string[]): any[] {
     const results = [];
-    expressions.forEach((old: string) => {
-      const oldWrapping: string =
-        this.latexFormattingService.formatLatexString(old);
-      const oldWrappingResult = texvcjs.check(oldWrapping);
-      const oldWrappingStatus =
-        oldWrappingResult.status === '+'
-          ? oldWrappingResult.status
-          : oldWrappingResult.error;
-
-      if (oldWrappingStatus !== '+') {
-        return;
-      }
-
-      const finalWrapping: string =
-        this.latexFormattingService.reverseLatexWrapping(oldWrapping);
+    expressions.forEach((oldStr: string) => {
+      const oldResult = texvcjs.check(oldStr);
+      const newStr: string = this.latexFixerService.fix(oldStr);
+      const newResult = texvcjs.check(newStr);
+      const newReversedResult = texvcjs.check(
+        (this.latexFixerService as any).reverseWrapping(newStr),
+      );
 
       const result = {
-        oldWrapping,
-        finalWrapping,
+        old: oldStr,
+        oldResult: oldResult.status === '+' ? oldResult : oldResult.error,
+        new: newStr,
+        newResult: newResult.status === '+' ? newResult : newResult.error,
+        newReversedResult: newReversedResult.status === '+'
+          ? newReversedResult
+          : newReversedResult.error,
       };
       results.push(result);
     });
