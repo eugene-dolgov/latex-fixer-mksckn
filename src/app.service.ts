@@ -30,7 +30,7 @@ export class AppService {
       unlinkSync('result.json');
     }
     const results = [];
-    CONTENT_LIST.forEach((contentItem) => {
+    CONTENT_LIST.slice(0, 10).forEach((contentItem) => {
       const mcq = JSON.parse(contentItem.content);
       const expressions: string[] = [mcq.question];
       mcq.answer_options.forEach((option) => {

@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LatexFormattingService } from './latex-formatting.service';
+import { LatexFixerService } from './latex-fixer-service';
 
 @Module({
   imports: [],
   controllers: [AppController],
-  providers: [AppService, LatexFormattingService],
+  providers: [AppService, LatexFixerService],
 })
 export class AppModule {}
