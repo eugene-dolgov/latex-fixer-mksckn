@@ -9,8 +9,16 @@ export const SpecialSymbolsWrappingFixer: LatexFixer = {
     SYMBOLS.forEach((symbol: string) => {
       const escapedSymbol = `\\${symbol}`;
       if (input.includes(escapedSymbol)) {
-        // We need double escaping when using new RegExp
-        input = input.replace(new RegExp('\\' + escapedSymbol, 'g'), `$${escapedSymbol}$`);
+        let result = '';
+        for (let i = 0; i < input.length; i++) {
+          if (input.substring(i, i + escapedSymbol.length) === escapedSymbol) {
+            result += `$${escapedSymbol}$`;
+            i += escapedSymbol.length - 1;
+          } else {
+            result += input[i];
+          }
+        }
+        input = result;
         input = EmptyMathSegmentsFixer.applyToAll(input);
       }
     });
