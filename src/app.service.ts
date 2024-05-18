@@ -45,6 +45,7 @@ export class AppService {
       console.log(`Done ${index + 1} / ${CONTENT_LIST.length}`);
     });
     writeFileSync('result.json', JSON.stringify(results, null, 2));
+    console.log('Done, result.json saved.')
     return 'Done';
   }
 
