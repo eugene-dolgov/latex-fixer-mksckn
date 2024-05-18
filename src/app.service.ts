@@ -18,6 +18,8 @@ const EXPRESSIONS_TO_CHECK = [
 
 @Injectable()
 export class AppService {
+  private validated = false;
+
   constructor(private latexFixerService: LatexFixerService) {}
 
   getHello(): any {
@@ -26,6 +28,9 @@ export class AppService {
   }
 
   private validateContent(): string {
+    if (this.validated) {
+      return 'Done';
+    }
     if (existsSync('result.json')) {
       unlinkSync('result.json');
     }
