@@ -30,7 +30,7 @@ export class AppService {
       unlinkSync('result.json');
     }
     const results = [];
-    CONTENT_LIST.forEach((contentItem) => {
+    CONTENT_LIST.forEach((contentItem, index) => {
       const mcq = JSON.parse(contentItem.content);
       const expressions: string[] = [mcq.question];
       mcq.answer_options.forEach((option) => {
@@ -42,6 +42,7 @@ export class AppService {
         list: this.checkExpressions(expressions),
       };
       results.push(result);
+      console.log(`Done ${index + 1} / ${CONTENT_LIST.length}`);
     });
     writeFileSync('result.json', JSON.stringify(results, null, 2));
     return 'Done';
