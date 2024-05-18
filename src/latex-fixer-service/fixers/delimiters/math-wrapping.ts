@@ -7,7 +7,7 @@ export const MathWrappingFixer: LatexFixer = {
     if (!input.includes('$') && /\\(?![_{}])/.test(input)) {
       const parts: string[] = input.split(' ');
       const wordsCount: number = parts.filter((part: string) => /^[a-zA-Z]+$/.test(part)).length;
-      if (wordsCount <= 2) {
+      if (wordsCount === 0) {
         input = `$${input}$`;
       }
     }
