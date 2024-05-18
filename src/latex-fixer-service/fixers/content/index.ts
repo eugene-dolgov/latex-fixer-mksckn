@@ -4,6 +4,7 @@ export * from './frac-escaping';
 export * from './frac-wrapping';
 export * from './non-ascii-characters';
 export * from './numbers-with-delimiters';
+export * from './set-wrapping';
 export * from './special-symbols-wrapping';
 export * from './textbf-wrapping';
 export * from './times-escaping';

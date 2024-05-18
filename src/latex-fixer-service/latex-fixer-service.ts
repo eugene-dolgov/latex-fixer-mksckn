@@ -25,6 +25,7 @@ export const CONTENT_FIXERS = [
   // Need to run at the end
   Fixers.SpecialSymbolsWrappingFixer,
   Fixers.FracWrappingFixer,
+  Fixers.SetWrappingFixer,
   Fixers.TextbfWrappingFixer,
 ];
 
