@@ -15,12 +15,12 @@ export const DELIMITER_FIXERS = [
 
 // Order is important here
 export const CONTENT_FIXERS = [
-  Fixers.ApostropheFixer,
-  Fixers.DollarCurrencyFixer,
-  Fixers.FracFixer,
+  Fixers.ApostropheEscapingFixer,
+  Fixers.DollarCurrencyEscapingFixer,
+  Fixers.FracEscapingFixer,
   Fixers.NonAsciiCharactersFixer,
   Fixers.NumbersWithDelimitersFixer,
-  Fixers.TimesFixer,
+  Fixers.TimesEscapingFixer,
   Fixers.UnderscoreFixer,
   // Need to run at the end
   Fixers.SpecialSymbolsWrappingFixer,

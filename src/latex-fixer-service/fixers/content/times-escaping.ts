@@ -1,6 +1,6 @@
 import { LatexFixer } from '../../models';
 
-export const TimesFixer: LatexFixer = {
+export const TimesEscapingFixer: LatexFixer = {
   description: 'Fix times escaping to have \\times',
   applyToLatex: (input: string) => input.replace(/\times/g, '\\times'),
 };
