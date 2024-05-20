@@ -27,6 +27,7 @@ export const CONTENT_FIXERS = [
   Fixers.FracWrappingFixer,
   Fixers.SetWrappingFixer,
   Fixers.TextbfWrappingFixer,
+  Fixers.EscapedNumbersWrappingFixer,
 ];
 
 export class LatexFixerService {

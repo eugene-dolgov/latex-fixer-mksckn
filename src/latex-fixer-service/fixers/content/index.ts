@@ -1,5 +1,6 @@
 export * from './apostrophe-escaping';
 export * from './dollar-currency-escaping';
+export * from './escaped-numbers-wrapping';
 export * from './frac-escaping';
 export * from './frac-wrapping';
 export * from './non-ascii-characters';
