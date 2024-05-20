@@ -6,7 +6,7 @@ export const EscapedNumbersWrappingFixer: LatexFixer = {
     let result = '';
     let i = 0;
     let insideMath = false;
-    let startIndex: number | null = null;
+    let startIndex: number = 0;
     while (i < input.length) {
       if (insideMath) {
         if (input[i] !== '.' && input[i] !== ')' && !/\d/.test(input[i])) {
