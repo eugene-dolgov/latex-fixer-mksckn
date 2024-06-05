@@ -44,7 +44,7 @@ export class AppService {
       const result = {
         contentId: contentItem.id,
         standardName: contentItem.standard_name,
-        list: this.checkExpressions(expressions),
+        expressions: this.checkExpressions(expressions),
       };
       results.push(result);
       console.log(`Done ${index + 1} / ${CONTENT_LIST.length}`);
@@ -65,12 +65,12 @@ export class AppService {
       const newReversedResult = texvcjs.check(newReversedStr);
 
       const result = {
-        old: oldStr,
-        oldValid: oldResult.status === '+' ? true : oldResult.error,
-        new: newStr,
-        newValid: newResult.status === '+' ? true : newResult.error,
-        newReversed: newReversedStr,
-        newReversedValid: newReversedResult.status === '+'
+        original: oldStr,
+        originalValid: oldResult.status === '+' ? true : oldResult.error,
+        fixed: newStr,
+        fixedValid: newResult.status === '+' ? true : newResult.error,
+        reversed: newReversedStr,
+        reversedValid: newReversedResult.status === '+'
           ? true
           : newReversedResult.error,
       };
